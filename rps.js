@@ -15,7 +15,8 @@ function getComputerChoice() {
 
 let buttons = document.querySelector(".buttons");
 const round = document.querySelector(".round");
-const results = document.querySelector(".results");
+const scores = document.querySelector(".scores");
+const result = document.querySelector(".result");
 
 buttons.addEventListener("click", (event) => {
   let humanChoice = event.target.textContent;
@@ -36,19 +37,22 @@ buttons.addEventListener("click", (event) => {
 function playRound(humanChoice, computerChoice) {
   if (humanChoice == computerChoice) {
     console.log("You both picked " + humanChoice + ", it's a draw.");
+    result.textContent = "You both picked " + humanChoice + ", it's a draw.";
   } else if (
     (humanChoice == "Rock" && computerChoice == "Scissors") ||
     (humanChoice == "Scissors" && computerChoice == "Paper") ||
     (humanChoice == "Paper" && computerChoice == "Rock")
   ) {
     console.log("You win the round! " + humanChoice + " beats " + computerChoice + ".");
+    result.textContent = "You win the round! " + humanChoice + " beats " + computerChoice + ".";
     humanScore++;
   } else {
     console.log("You lost the round! " + computerChoice + " beats " + humanChoice + ".");
+    result.textContent = "You lost the round! " + computerChoice + " beats " + humanChoice + ".";
     computerScore++;
   }
 
   roundsPlayed++;
 
-  results.textContent = "Scores: Player: " + humanScore + " Computer: " + computerScore;
+  scores.textContent = "Scores: Player: " + humanScore + " Computer: " + computerScore;
 }

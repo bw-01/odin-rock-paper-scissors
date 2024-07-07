@@ -3,6 +3,8 @@
 
 let humanScore = 0;
 let computerScore = 0;
+let roundsPlayed = 0;
+const maxRounds = 5;
 
 //Randomly generate computer choice
 function getComputerChoice() {
@@ -12,15 +14,25 @@ function getComputerChoice() {
 }
 
 let buttons = document.querySelector(".buttons");
+const round = document.querySelector(".round");
+const results = document.querySelector(".results");
 
 buttons.addEventListener("click", (event) => {
   let humanChoice = event.target.textContent;
   let computerChoice = getComputerChoice();
 
-  playRound(humanChoice, computerChoice);
+  if (roundsPlayed < maxRounds) {
+    playRound(humanChoice, computerChoice);
+  }
+
+  if (roundsPlayed == maxRounds) {
+    round.textContent = "Game Over. Thanks for playing.";
+  } else {
+    round.textContent = "Round " + (roundsPlayed + 1) + " of " + maxRounds;
+  }
 });
 
-//Play a single round of the game
+//Play a round of the game
 function playRound(humanChoice, computerChoice) {
   if (humanChoice == computerChoice) {
     console.log("You both picked " + humanChoice + ", it's a draw.");
@@ -29,29 +41,14 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice == "Scissors" && computerChoice == "Paper") ||
     (humanChoice == "Paper" && computerChoice == "Rock")
   ) {
-    console.log("You win! " + humanChoice + " beats " + computerChoice + ".");
+    console.log("You win the round! " + humanChoice + " beats " + computerChoice + ".");
     humanScore++;
   } else {
-    console.log("You lost! " + computerChoice + " beats " + humanChoice + ".");
+    console.log("You lost the round! " + computerChoice + " beats " + humanChoice + ".");
     computerScore++;
   }
+
+  roundsPlayed++;
+
+  results.textContent = "Scores: Player: " + humanScore + " Computer: " + computerScore;
 }
-
-//Play multiple rounds of the game
-function playGame() {
-  for (round = 1; round <= 5; round++) {
-    console.log("Round " + round);
-    // let humanChoice = getHumanChoice();
-    // let computerChoice = getComputerChoice();
-
-    // playRound(humanChoice, computerChoice);
-  }
-
-  if (humanScore > computerScore) {
-    console.log("Well done! You won with a score of " + humanScore + "/5!");
-  } else {
-    console.log("Sadly, you lost with a score of " + humanScore + "/5.");
-  }
-}
-
-// playGame();

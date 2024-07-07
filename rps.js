@@ -23,7 +23,7 @@ function getHumanChoice() {
   return choice;
 }
 
-//Play a round of the game
+//Play a single round of the game
 function playRound(humanChoice, computerChoice) {
   if (humanChoice == computerChoice) {
     console.log("You both picked " + humanChoice + ", it's a draw.");
@@ -40,6 +40,7 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
+//Play multiple rounds of the game
 function playGame() {
   console.log("Welcome to Rock, Paper, Scissors. The game will play for 5 rounds.");
   for (round = 1; round <= 5; round++) {
